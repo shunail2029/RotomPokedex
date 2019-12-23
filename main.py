@@ -56,7 +56,8 @@ def handle_message(event):
     head += 'の検索結果はこちらロト！'
     content = json.loads((json.dumps(myline.get_flex_json(results))))
     flexmessage = FlexSendMessage(alt_text='hello', contents=content)
-    print('flexmessage : ' + flexmessage)
+    print('flexmessage > ')
+    print(flexmessage)
     line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage])
 
 if __name__ == "__main__":
