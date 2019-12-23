@@ -7,11 +7,13 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    FollowEvent, MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, CarouselColumn, CarouselTemplate
+    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, FlexSendMessage
 )
 import os
+import json
 
 import mydb
+import myline
 
 app = Flask(__name__)
 
@@ -39,7 +41,7 @@ def callback():
 def handle_message(event):
     text = event.message.text
     name_list = text.split('\n')
-    columns = []
+    results = []
     head = ''
     is_first = True
     for name in name_list:
@@ -47,15 +49,13 @@ def handle_message(event):
         if not is_first:
             head += 'と'
         head += name
-        results = mydb.get_pokemon(name)
-        if len(results) == 0:
-            columns.append(CarouselColumn(title=name, text='このなまえのポケモンは見つからなかったロ...'))
-        for result in results:
-            columns.append(CarouselColumn(title=result[0], text=result[1]))
+        result = mydb.get_pokemon(name)
+        results.append(result)
 
     head += 'の検索結果はこちらロト！'
-    line_bot_api.reply_message(event.reply_token, TemplateSendMessage(alt_text='Carousel template', template=CarouselTemplate(columns=columns)))
-    # TextSendMessage(text=head),
+    content = myline.get_flex_json(results)
+    line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), FlexSendMessage(alt_text='hello', contents=json.dumps(content))])
+
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
