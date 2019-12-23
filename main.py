@@ -48,12 +48,13 @@ def handle_message(event):
             head += 'と'
         head += name
         results = mydb.get_pokemon(name)
+        if len(results) == 0:
+            columns.append(CarouselColumn(title=name), text='このなまえのポケモンは見つからなかったロ...')
         for result in results:
             columns.append(CarouselColumn(title=result[0], text=result[1]))
 
     head += 'の検索結果はこちらロト！'
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=head))
-    line_bot_api.reply_message(event.reply_token, TemplateSendMessage(alt_text='Carousel template', template=CarouselTemplate(columns=columns)))
+    line_bot_api.reply_message(event.reply_token, [TextSendMessage(text=head), TemplateSendMessage(alt_text='Carousel template', template=CarouselTemplate(columns=columns))])
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5000))
