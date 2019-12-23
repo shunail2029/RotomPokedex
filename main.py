@@ -20,12 +20,15 @@ CHANNEL_SECRET = os.environ['CHANNEL_SECRET']
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 
+@app.route('/', methods=['GET'])
+def get():
+    print('Hello World!!')
+
 @app.route('/callback', methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
 
     body = request.get_data(as_text=True)
-    app.logger.info('Request body: ' + body)
 
     try:
         handler.handle(body, signature)
