@@ -10,6 +10,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, FlexSendMessage
 )
 import os
+import json
 
 import mydb
 import myline
@@ -52,7 +53,7 @@ def handle_message(event):
         results.append(result)
 
     head += 'の検索結果はこちらロト！'
-    content = FlexSendMessage.new_from_json_dict(myline.get_flex_json(results))
+    content = FlexSendMessage.new_from_json_dict(json.dumps(myline.get_flex_json(results)))
     line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), FlexSendMessage(alt_text='hello', contents=content)])
 
 if __name__ == "__main__":
