@@ -11,7 +11,7 @@ def get_pokemon(name):
     with get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute(f'''SELECT * FROM pokeinfo WHERE name LIKE '%{name}%';''')
-            if len(cur) == 0:
+            if not cur:
                 message_list.append([name, '', 'このなまえのポケモンは見つからなかったロト...'])
             else:
                 for row in cur:
