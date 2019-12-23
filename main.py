@@ -54,8 +54,8 @@ def handle_message(event):
             columns.append(CarouselColumn(title=result[0], text=result[1]))
 
     head += 'の検索結果はこちらロト！'
-    line_bot_api.reply_message(event.reply_token, [TextSendMessage(text=head), TemplateSendMessage(alt_text='Carousel template', template=CarouselTemplate(columns=columns))])
-
+    line_bot_api.reply_message(event.reply_token, TemplateSendMessage(alt_text='Carousel template', template=CarouselTemplate(columns=columns)))
+    # TextSendMessage(text=head),
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
