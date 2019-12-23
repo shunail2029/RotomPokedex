@@ -1,42 +1,42 @@
 def get_type_color(typename):
     if typename == 'ノーマル':
-        return '#b1b1b1'
+        return "#b1b1b1"
     elif typename == 'ほのお':
-        return '#e4653f'
+        return "#e4653f"
     elif typename == 'みず':
-        return '#50abda'
+        return "#50abda"
     elif typename == 'でんき':
-        return '#e8c71a'
+        return "#e8c71a"
     elif typename == 'くさ':
-        return '#6cbe50'
+        return "#6cbe50"
     elif typename == 'こおり':
-        return '#53c4e5'
+        return "#53c4e5"
     elif typename == 'かくとう':
-        return '#e99a3f'
+        return "#e99a3f"
     elif typename == 'どく':
-        return '#ba79c1'
+        return "#ba79c1"
     elif typename == 'じめん':
-        return '#c8a841'
+        return "#c8a841"
     elif typename == 'ひこう':
-        return '#5e9fe2'
+        return "#5e9fe2"
     elif typename == 'エスパー':
-        return '#e885b2'
+        return "#e885b2"
     elif typename == 'むし':
-        return '#9ac30e'
+        return "#9ac30e"
     elif typename == 'いわ':
-        return '#b08754'
+        return "#b08754"
     elif typename == 'ゴースト':
-        return '#756eb4'
+        return "#756eb4"
     elif typename == 'ドラゴン':
-        return '#6c81c8'
+        return "#6c81c8"
     elif typename == 'あく':
-        return '#5a3c1e'
+        return "#5a3c1e"
     elif typename == 'はがね':
-        return '#919191'
+        return "#919191"
     elif typename == 'フェアリー':
-        return '#e06cbb'
+        return "#e06cbb"
     else:
-        return '#000000'
+        return "#000000"
 
 def get_flex_json(results):
     contents = []
@@ -74,7 +74,7 @@ def get_flex_json(results):
                         {
                             "type": "text",
                             "text": text,
-                            "color": "#000000",
+                            "color": "#000000"
                         }
                     ]
                 }
