@@ -63,7 +63,8 @@ def get_flex_json(results):
                         {
                             "type": "text",
                             "text": name,
-                            "color": "#ffffff"
+                            "color": "#ffffff",
+                            "wrap": True
                         }
                     ]
                 },
@@ -74,7 +75,8 @@ def get_flex_json(results):
                         {
                             "type": "text",
                             "text": text,
-                            "color": "#000000"
+                            "color": "#000000",
+                            "wrap": True
                         }
                     ]
                 }
