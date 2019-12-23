@@ -48,7 +48,7 @@ def get_flex_json(results):
             color = get_type_color(typename)
             content = {
                 "type": "bubble",
-                "size": "kilo",
+                "size": "micro",
                 "styles": {
                     "header": {
                         "backgroundColor": color
@@ -65,7 +65,8 @@ def get_flex_json(results):
                             "type": "text",
                             "text": name,
                             "color": "#ffffff",
-                            "wrap": True
+                            "wrap": True,
+                            "size": "sm"
                         }
                     ]
                 },
@@ -77,7 +78,8 @@ def get_flex_json(results):
                             "type": "text",
                             "text": text,
                             "color": "#000000",
-                            "wrap": True
+                            "wrap": True,
+                            "size": "sm"
                         }
                     ]
                 }
