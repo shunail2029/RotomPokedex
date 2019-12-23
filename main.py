@@ -29,6 +29,7 @@ def callback():
     signature = request.headers['X-Line-Signature']
 
     body = request.get_data(as_text=True)
+    print('callback\nbody: ' + body)
 
     try:
         handler.handle(body, signature)
@@ -54,7 +55,9 @@ def handle_message(event):
 
     head += 'の検索結果はこちらロト！'
     content = json.loads((json.dumps(myline.get_flex_json(results))))
-    line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), FlexSendMessage(alt_text='hello', contents=content)])
+    flexmessage = FlexSendMessage(alt_text='hello', contents=content)
+    print('flexmessage : ' + flexmessage)
+    line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage])
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5000))
