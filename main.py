@@ -53,7 +53,7 @@ def handle_message(event):
         results.append(result)
 
     head += 'の検索結果はこちらロト！'
-    content = FlexSendMessage.new_from_json_dict(json.dumps(myline.get_flex_json(results)))
+    content = json.loads((json.dumps(myline.get_flex_json(results))))
     line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), FlexSendMessage(alt_text='hello', contents=content)])
 
 if __name__ == "__main__":
