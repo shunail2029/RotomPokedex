@@ -49,7 +49,7 @@ def handle_message(event):
         head += name
         results = mydb.get_pokemon(name)
         if len(results) == 0:
-            columns.append(CarouselColumn(title=name), text='このなまえのポケモンは見つからなかったロ...')
+            columns.append(CarouselColumn(title=name, text='このなまえのポケモンは見つからなかったロ...'))
         for result in results:
             columns.append(CarouselColumn(title=result[0], text=result[1]))
 
