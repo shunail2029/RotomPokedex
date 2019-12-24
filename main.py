@@ -52,6 +52,7 @@ def handle_message(event):
         head += name
         result = mydb.get_pokemon(name)
         results.append(result)
+        is_first = False
 
     head += 'の検索結果はこちらロト！'
     content = json.loads((json.dumps(myline.get_flex_json(results))))

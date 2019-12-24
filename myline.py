@@ -86,4 +86,4 @@ def get_flex_json(results):
             }
             contents.append(content)
 
-    return {"type": "carousel", "contents": contents}
+    return {"type": "carousel", "contents": contents[:10]}
