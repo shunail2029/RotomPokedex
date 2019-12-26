@@ -1,42 +1,4 @@
-def get_type_color(typename):
-    if typename == 'ノーマル':
-        return "#b1b1b1"
-    elif typename == 'ほのお':
-        return "#e4653f"
-    elif typename == 'みず':
-        return "#50abda"
-    elif typename == 'でんき':
-        return "#e8c71a"
-    elif typename == 'くさ':
-        return "#6cbe50"
-    elif typename == 'こおり':
-        return "#53c4e5"
-    elif typename == 'かくとう':
-        return "#e99a3f"
-    elif typename == 'どく':
-        return "#ba79c1"
-    elif typename == 'じめん':
-        return "#c8a841"
-    elif typename == 'ひこう':
-        return "#5e9fe2"
-    elif typename == 'エスパー':
-        return "#e885b2"
-    elif typename == 'むし':
-        return "#9ac30e"
-    elif typename == 'いわ':
-        return "#b08754"
-    elif typename == 'ゴースト':
-        return "#756eb4"
-    elif typename == 'ドラゴン':
-        return "#6c81c8"
-    elif typename == 'あく':
-        return "#5a3c1e"
-    elif typename == 'はがね':
-        return "#919191"
-    elif typename == 'フェアリー':
-        return "#e06cbb"
-    else:
-        return "#000000"
+typecolors = {'ノーマル': '#b1b1b1', 'ほのお': '#e4653f', 'みず': '#50abda', 'でんき': '#e8c71a', 'くさ': '#6cbe50', 'こおり': '#53c4e5', 'かくとう': '#e99a3f', 'どく': '#ba79c1', 'じめん': '#c8a841', 'ひこう': '#5e9fe2', 'エスパー': '#e885b2', 'むし': '#9ac30e',  'いわ': '#b08754', 'ゴースト': '#756eb4', 'ドラゴン': '#6c81c8', 'あく': '#5a3c1e', 'はがね': '#919191', 'フェアリー': '#e06cbb'}
 
 def get_flex_json(results):
     contents = []
@@ -45,7 +7,7 @@ def get_flex_json(results):
             name = poke[0]
             typename = poke[1]
             text = poke[2]
-            color = get_type_color(typename)
+            color = typecolors.get(typename, '#000000')
             content = {
                 "type": "bubble",
                 "size": "micro",

@@ -10,7 +10,6 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, FlexSendMessage
 )
 import os
-import json
 
 import mydb
 import myline
@@ -41,12 +40,14 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     text = event.message.text
-    name_list = text.split('\n')
+    name_list = text.split()
     results = []
     head = ''
     is_first = True
     for name in name_list:
-        name = name.strip()
+        if not name:
+            continue
+        print('start to search ' + name)
         if not is_first:
             head += 'と'
         head += name
@@ -54,12 +55,16 @@ def handle_message(event):
         results.append(result)
         is_first = False
 
-    head += 'の検索結果はこちらロト！'
-    content = json.loads((json.dumps(myline.get_flex_json(results))))
-    flexmessage = FlexSendMessage(alt_text='hello', contents=content)
-    print('flexmessage > ')
-    print(flexmessage)
-    line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage])
+    if results:
+        head += 'の検索結果はこちらロト！'
+        content = myline.get_flex_json(results)
+        flexmessage = FlexSendMessage(alt_text='hello', contents=content)
+        print('flexmessage > ')
+        print(flexmessage)
+        line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage])
+    else:
+        print('no pokemon name received')
+        line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text='どのポケモンについて知りたいか教えてほしいロト！')])
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5000))
