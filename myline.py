@@ -2,6 +2,7 @@ typecolors = {'ノーマル': '#b1b1b1', 'ほのお': '#e4653f', 'みず': '#50a
 
 def get_flex_json(results):
     contents = []
+    cnt = 0
     for result in results:
         for poke in result:
             name = poke[0]
@@ -47,5 +48,12 @@ def get_flex_json(results):
                 }
             }
             contents.append(content)
+            cnt += 1
+            if cnt == 10:
+                break
+        else:
+            continue
+        break
 
-    return {"type": "carousel", "contents": contents[:10]}
+
+    return {"type": "carousel", "contents": contents}

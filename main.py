@@ -44,6 +44,7 @@ def handle_message(event):
     results = []
     head = ''
     is_first = True
+    cnt_bubble = 0
     for name in name_list:
         if not name:
             continue
@@ -54,17 +55,23 @@ def handle_message(event):
         result = mydb.get_pokemon(name)
         results.append(result)
         is_first = False
+        cnt_bubble += len(result)
+        if cnt_bubble > 10:
+            break
 
-    if results:
+    if cnt_bubble == 0:
+        print('no pokemon name received')
+        line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text='どのポケモンについて知りたいか教えてほしいロト！')])
+    else:
         head += 'の検索結果はこちらロト！'
         content = myline.get_flex_json(results)
         flexmessage = FlexSendMessage(alt_text='hello', contents=content)
         print('flexmessage > ')
         print(flexmessage)
-        line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage])
-    else:
-        print('no pokemon name received')
-        line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text='どのポケモンについて知りたいか教えてほしいロト！')])
+        if cnt_bubble <= 10:
+            line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage])
+        else:
+            line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage, TextSendMessage(text='検索結果が多すぎてぜんぶは表示できなかったロト...')])
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5000))
