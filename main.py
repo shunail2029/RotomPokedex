@@ -11,7 +11,7 @@ from linebot.models import (
 )
 import os
 
-from mypackage import *
+from mypackage import mydb, myline
 
 app = Flask(__name__)
 
