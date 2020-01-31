@@ -11,8 +11,7 @@ from linebot.models import (
 )
 import os
 
-import mydb
-import myline
+from mypackage import *
 
 app = Flask(__name__)
 
@@ -43,21 +42,25 @@ def handle_message(event):
     name_list = text.split()
     results = []
     head = ''
-    is_first = True
+    notfound = ''
     cnt_bubble = 0
     for name in name_list:
         if not name:
             continue
         print('start to search ' + name)
-        if not is_first:
+        if head:
             head += 'と'
         head += name
-        result = mydb.get_pokemon(name)
-        results.append(result)
-        is_first = False
-        cnt_bubble += len(result)
-        if cnt_bubble > 10:
-            break
+        if cnt_bubble <= 10:
+            result = mydb.get_pokemon(name)
+            for res in result:
+                if not res[1]:
+                    if notfound:
+                        notfound += 'と'
+                    notfound += res[0]
+                else:
+                    results.append(res)
+                    cnt_bubble += 1
 
     if cnt_bubble == 0:
         print('no pokemon name received')
@@ -69,9 +72,15 @@ def handle_message(event):
         print('flexmessage > ')
         print(flexmessage)
         if cnt_bubble <= 10:
-            line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage])
+            if notfound:
+                line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage, TextSendMessage(text=notfound+'はみつからなかったロト...')])
+            else:
+                line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage])
         else:
-            line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage, TextSendMessage(text='検索結果が多すぎてぜんぶは表示できなかったロト...')])
+            if notfound:
+                line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage, TextSendMessage(text=notfound+'はみつからなかったロト...'), TextSendMessage(text='検索結果が多すぎてぜんぶは表示できなかったロト...')])
+            else:
+                line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage, TextSendMessage(text='検索結果が多すぎてぜんぶは表示できなかったロト...')])
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5000))

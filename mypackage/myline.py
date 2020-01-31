@@ -3,57 +3,52 @@ typecolors = {'ノーマル': '#b1b1b1', 'ほのお': '#e4653f', 'みず': '#50a
 def get_flex_json(results):
     contents = []
     cnt = 0
-    for result in results:
-        for poke in result:
-            name = poke[0]
-            typename = poke[1]
-            text = poke[2]
-            color = typecolors.get(typename, '#000000')
-            content = {
-                "type": "bubble",
-                "size": "micro",
-                "styles": {
-                    "header": {
-                        "backgroundColor": color
-                    },
-                    "body": {
-                        "backgroundColor": "#ffffff"
-                    }
-                },
+    for poke in results:
+        name = poke[0]
+        typename = poke[1]
+        text = poke[2]
+        color = typecolors.get(typename, '#000000')
+        content = {
+            "type": "bubble",
+            "size": "micro",
+            "styles": {
                 "header": {
-                    "type": "box",
-                    "layout": "vertical",
-                    "contents": [
-                        {
-                            "type": "text",
-                            "text": name,
-                            "color": "#ffffff",
-                            "wrap": True,
-                            "size": "sm"
-                        }
-                    ]
+                    "backgroundColor": color
                 },
                 "body": {
-                    "type": "box",
-                    "layout": "vertical",
-                    "contents": [
-                        {
-                            "type": "text",
-                            "text": text,
-                            "color": "#000000",
-                            "wrap": True,
-                            "size": "sm"
-                        }
-                    ]
+                    "backgroundColor": "#ffffff"
                 }
+            },
+            "header": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": name,
+                        "color": "#ffffff",
+                        "wrap": True,
+                        "size": "sm"
+                    }
+                ]
+            },
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": text,
+                        "color": "#000000",
+                        "wrap": True,
+                        "size": "sm"
+                    }
+                ]
             }
-            contents.append(content)
-            cnt += 1
-            if cnt == 10:
-                break
-        else:
-            continue
-        break
-
+        }
+        contents.append(content)
+        cnt += 1
+        if cnt == 10:
+            break
 
     return {"type": "carousel", "contents": contents}
