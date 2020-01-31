@@ -1,5 +1,3 @@
-import os
-import psycopg2
 from google.cloud import firestore
 
 db = firestore.Client()
