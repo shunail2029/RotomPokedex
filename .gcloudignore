@@ -130,5 +130,6 @@ dmypy.json
 
 .vscode
 .venv
+.gitignore
 credential.json
-app.yaml
+README.md
