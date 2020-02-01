@@ -130,6 +130,7 @@ dmypy.json
 
 .vscode
 .venv
+.git
 .gitignore
 credential.json
 README.md
