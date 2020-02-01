@@ -134,3 +134,4 @@ dmypy.json
 .gitignore
 credential.json
 README.md
+app.yaml.sample
