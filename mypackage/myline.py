@@ -4,7 +4,10 @@ def get_flex_json(results):
     contents = []
     cnt = 0
     for poke in results:
-        color = typecolors.get(poke['type'], '#000000')
+        name = poke['name']
+        if '(' in name:
+            name = name.split('(')[0] + '\n(' + name.split('(')[1]
+        color = typecolors.get(poke['type'].split('/')[0], '#000000')
         content = {
             "type": "bubble",
             "size": "micro",
@@ -22,7 +25,7 @@ def get_flex_json(results):
                 "contents": [
                     {
                         "type": "text",
-                        "text": poke['name'],
+                        "text": name,
                         "color": "#ffffff",
                         "wrap": True,
                         "size": "sm"
