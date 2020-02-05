@@ -4,10 +4,7 @@ def get_flex_json(results):
     contents = []
     cnt = 0
     for poke in results:
-        name = poke[0]
-        typename = poke[1]
-        text = poke[2]
-        color = typecolors.get(typename, '#000000')
+        color = typecolors.get(poke['type'], '#000000')
         content = {
             "type": "bubble",
             "size": "micro",
@@ -25,7 +22,7 @@ def get_flex_json(results):
                 "contents": [
                     {
                         "type": "text",
-                        "text": name,
+                        "text": poke['name'],
                         "color": "#ffffff",
                         "wrap": True,
                         "size": "sm"
@@ -38,10 +35,149 @@ def get_flex_json(results):
                 "contents": [
                     {
                         "type": "text",
-                        "text": text,
+                        "text": "タイプ: " + poke['type'],
                         "color": "#000000",
                         "wrap": True,
                         "size": "sm"
+                    },
+                    {
+                        "type": "text",
+                        "text": "--- 種族値 ---",
+                        "color": "#000000",
+                        "wrap": True,
+                        "size": "sm",
+                        "align": "center"
+                    },
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "たいりょく",
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "こうげき",
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "ぼうぎょ",
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "とくこう",
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "とくぼう",
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "すばやさ",
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "ごうけい",
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    }
+                                ],
+                                "flex": 1
+                            },
+                            {
+                                "type": "box",
+                                "layout": "vertical",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": poke['hit_point'],
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": poke['attack'],
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": poke['defense'],
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": poke['special_attack'],
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": poke['special_defense'],
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": poke['speed'],
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": poke['sum'],
+                                        "color": "#000000",
+                                        "wrap": True,
+                                        "size": "sm",
+                                        "align": "center"
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             }

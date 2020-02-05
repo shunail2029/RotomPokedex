@@ -64,27 +64,19 @@ def handle_message(event):
 
     head += 'の検索結果はこちらロト！'
     if cnt_bubble == 0:
-        if notfound:
-            print('no pokemon were found')
-            line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), TextSendMessage(text=notfound+'はみつからなかったロト...')])
-        else:
-            print('no pokemon name received')
-            line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text='どのポケモンについて知りたいか教えてほしいロト！')])
+        print('no pokemon were found')
+        line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), TextSendMessage(text=notfound+'はみつからなかったロト...')])
     else:
         content = myline.get_flex_json(results)
         flexmessage = FlexSendMessage(alt_text='Good luck', contents=content)
         print('flexmessage > ')
         print(flexmessage)
-        if cnt_bubble <= 10:
-            if notfound:
-                line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage, TextSendMessage(text=notfound+'はみつからなかったロト...')])
-            else:
-                line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage])
-        else:
-            if notfound:
-                line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage, TextSendMessage(text=notfound+'はみつからなかったロト...'), TextSendMessage(text='検索結果が多すぎてぜんぶは表示できなかったロト...')])
-            else:
-                line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), flexmessage, TextSendMessage(text='検索結果が多すぎてぜんぶは表示できなかったロト...')])
+        messages = [TextSendMessage(text=head), flexmessage]
+        if notfound:
+            messages.append(TextSendMessage(text=notfound+'はみつからなかったロト...'))
+        if cnt_bubble > 10:
+            messages.append(TextSendMessage(text='検索結果が多すぎてぜんぶは表示できなかったロト...'))
+        line_bot_api.reply_message(event.reply_token, messages=messages)
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5000))

@@ -4,10 +4,20 @@ db = firestore.Client()
 
 def get_pokemon(name):
     message_list = []
-    docs = db.collection('pokeinfo').where('keywords', 'array_contains', name).order_by('id').limit(10).stream()
+    docs = db.collection('pokeinfo').where('keywords', 'array_contains', name).order_by('id').limit(11).stream()
     for doc in docs:
         res = doc.to_dict()
-        message = [res['name'], res['type'].split('/')[0], f'''タイプ: {res['type']}\n-- 種族値 --\nたいりょく: {res['hit_point']}\nこうげき:     {res['attack']}\nぼうぎょ:     {res['defense']}\nとくこう:     {res['special_attack']}\nとくぼう:     {res['special_defense']}\nすばやさ:     {res['speed']}\nごうけい:     {res['sum']}''']
+        message = {
+            'name': res['name'],
+            'type': res['type'],
+            'hit_point': res['hit_point'],
+            'attack': res['attack'],
+            'defense': res['defense'],
+            'special_attack': res['special_attack'],
+            'special_defense': res['special_defense'],
+            'speed': res['speed'],
+            'sum': res['sum']
+        }
         message_list.append(message)
 
     if not message_list:
