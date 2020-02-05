@@ -16,10 +16,11 @@ def get_pokemon(name):
             'special_attack': res['special_attack'],
             'special_defense': res['special_defense'],
             'speed': res['speed'],
-            'sum': res['sum']
+            'sum': res['sum'],
+            'success': True
         }
         message_list.append(message)
 
     if not message_list:
-        message_list.append([name, False])
+        message_list.append({'name': name, 'success': False})
     return message_list

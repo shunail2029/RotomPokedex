@@ -54,7 +54,7 @@ def handle_message(event):
         if cnt_bubble <= 10:
             result = mydb.get_pokemon(name)
             for res in result:
-                if not res[1]:
+                if not res['success']:
                     if notfound:
                         notfound += 'と'
                     notfound += res[0]
