@@ -57,7 +57,7 @@ def handle_message(event):
                 if not res['success']:
                     if notfound:
                         notfound += 'と'
-                    notfound += res[0]
+                    notfound += res['name']
                 else:
                     results.append(res)
                     cnt_bubble += 1
