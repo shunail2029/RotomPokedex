@@ -121,7 +121,7 @@ def get_flex_json(results):
                                 "contents": [
                                     {
                                         "type": "text",
-                                        "text": poke['hit_point'],
+                                        "text": str(poke['hit_point']),
                                         "color": "#000000",
                                         "wrap": True,
                                         "size": "sm",
@@ -129,7 +129,7 @@ def get_flex_json(results):
                                     },
                                     {
                                         "type": "text",
-                                        "text": poke['attack'],
+                                        "text": str(poke['attack']),
                                         "color": "#000000",
                                         "wrap": True,
                                         "size": "sm",
@@ -137,7 +137,7 @@ def get_flex_json(results):
                                     },
                                     {
                                         "type": "text",
-                                        "text": poke['defense'],
+                                        "text": str(poke['defense']),
                                         "color": "#000000",
                                         "wrap": True,
                                         "size": "sm",
@@ -145,7 +145,7 @@ def get_flex_json(results):
                                     },
                                     {
                                         "type": "text",
-                                        "text": poke['special_attack'],
+                                        "text": str(poke['special_attack']),
                                         "color": "#000000",
                                         "wrap": True,
                                         "size": "sm",
@@ -153,7 +153,7 @@ def get_flex_json(results):
                                     },
                                     {
                                         "type": "text",
-                                        "text": poke['special_defense'],
+                                        "text": str(poke['special_defense']),
                                         "color": "#000000",
                                         "wrap": True,
                                         "size": "sm",
@@ -161,7 +161,7 @@ def get_flex_json(results):
                                     },
                                     {
                                         "type": "text",
-                                        "text": poke['speed'],
+                                        "text": str(poke['speed']),
                                         "color": "#000000",
                                         "wrap": True,
                                         "size": "sm",
@@ -169,7 +169,7 @@ def get_flex_json(results):
                                     },
                                     {
                                         "type": "text",
-                                        "text": poke['sum'],
+                                        "text": str(poke['sum']),
                                         "color": "#000000",
                                         "wrap": True,
                                         "size": "sm",
