@@ -7,8 +7,10 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, FlexSendMessage
-)
+    MessageEvent,
+    TextMessage,
+    TextSendMessage,
+    FlexSendMessage)
 import os
 
 from mypackage import mydb, myline
@@ -21,6 +23,7 @@ CHANNEL_SECRET = os.environ['CHANNEL_SECRET']
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
+
 
 @app.route('/callback', methods=['POST'])
 def callback():
@@ -35,6 +38,7 @@ def callback():
         abort(400)
 
     return 'OK'
+
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -65,7 +69,11 @@ def handle_message(event):
     head += 'の検索結果はこちらロト！'
     if cnt_bubble == 0:
         print('no pokemon were found')
-        line_bot_api.reply_message(event.reply_token, messages=[TextSendMessage(text=head), TextSendMessage(text=notfound+'はみつからなかったロト...')])
+        line_bot_api.reply_message(
+            event.reply_token, messages=[
+                TextSendMessage(
+                    text=head), TextSendMessage(
+                    text=notfound + 'はみつからなかったロト...')])
     else:
         content = myline.get_flex_json(results)
         flexmessage = FlexSendMessage(alt_text='Good luck', contents=content)
@@ -73,10 +81,11 @@ def handle_message(event):
         print(flexmessage)
         messages = [TextSendMessage(text=head), flexmessage]
         if notfound:
-            messages.append(TextSendMessage(text=notfound+'はみつからなかったロト...'))
+            messages.append(TextSendMessage(text=notfound + 'はみつからなかったロト...'))
         if cnt_bubble > 10:
             messages.append(TextSendMessage(text='検索結果が多すぎてぜんぶは表示できなかったロト...'))
         line_bot_api.reply_message(event.reply_token, messages=messages)
+
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5000))

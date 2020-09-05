@@ -2,9 +2,13 @@ from google.cloud import firestore
 
 db = firestore.Client()
 
+
 def get_pokemon(name):
     message_list = []
-    docs = db.collection('pokeinfo').where('keywords', 'array_contains', name).order_by('id').limit(11).stream()
+    docs = db.collection('pokeinfo').where(
+        'keywords',
+        'array_contains',
+        name).order_by('id').limit(11).stream()
     for doc in docs:
         res = doc.to_dict()
         message = {
